@@ -2,8 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
-  name: string;
-  secret?: string
+  message: string | string[];
 }
 
 export default function handler(
@@ -11,8 +10,7 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
 
-  console.log(process.env);
-  
+  const {message = 'Bad request'} = req.query;
 
-  res.status(200).json({ name: 'John Doe', secret: process.env.SECRET_KEY })
+  res.status(400).json({ message })
 }
